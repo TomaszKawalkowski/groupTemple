@@ -1,0 +1,57 @@
+{% trans_default_domain 'FOSUserBundle' %}
+
+<form action="{{ path('fos_user_registration_register') }}" {{ form_enctype(form) }} method="POST"
+      class="fos_user_registration_register">
+
+    <div class="container">
+
+        <div class="row">
+            <div class="col-md-1"></div>
+            <div class="col-md-10">
+                <div class="col-md-4"></div>
+                <div class="col-md-4 ">
+                    <div class="form-group form-width">
+
+
+
+                        <label>User name:</label>
+                        {{ form_widget(form.username,{'attr': {'class': 'form-control'}}) }}
+
+                        <label>Email</label>
+                        {{ form_widget(form.email,{'attr': {'class': 'form-control'}}) }}
+
+                        <div class="odstep35"></div>
+                        <label>Password and verify password:</label>
+                        {{ form_widget(form) }}
+
+
+
+                    </div>
+                </div>
+                <div class="col-md-4"></div>
+            </div>
+            <div class="col-md-1"></div>
+        </div>
+    </div>
+
+
+    <div class="container">
+
+        <div class="row">
+            <div class="col-md-1"></div>
+            <div class="col-md-10">
+                <div class="col-md-4"></div>
+                <div class="col-md-4 ">
+
+                    <div class="form-group">
+                        <input type="submit" class="button" id="_submit" name="_submit"
+                               value="{{ 'REGISTER'|trans }}"/>
+
+                    </div>
+                </div>
+                <div class="col-md-4"></div>
+            </div>
+            <div class="col-md-1"></div>
+        </div>
+    </div>
+</form>

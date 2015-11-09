@@ -1,0 +1,91 @@
+{% extends "TempleBundle:Main:main.html.twig" %}
+
+  {% block content %}
+
+<div class="col-sm-8">
+    <div class="row">
+        <div class="posttlo">
+
+            <div class="row">
+
+                <div class="col-sm-12">
+                    <div class="odstep35"></div>
+                    <table class="table textformat">
+                        <thead>
+                        <tr>
+                            <th class="posthead">Author and date</th>
+                            <th class="posthead">Posts <br> {{ technologyArrow[0].name }}</th>
+
+                        </tr>
+                        </thead>
+                        {% for post in postsLecturers %}
+                            <tr>
+                                <td class="postinfo">
+                                   {% for user in users %}
+                                        {% if post.userid == user.id %}
+                                            {{ user.username }}
+                                        {% endif %}
+                                    {% endfor %}
+                                 {{ post.datetime |date('Y-m-d H:i:s' ) }}
+                                </td>
+                                <td class="content">
+                                    {{ post.content }}
+                                    {#<div class="button">dsffdsfds</div>#}
+                                </td>
+                            </tr>
+
+                        {% endfor %}
+
+
+                        {% for post in postStudents %}
+                        <tr>
+                            <td class="postinfo">
+                               {% for user in users %}
+                                    {% if post.userid == user.id %}
+                                        {{ user.username }}
+                                    {% endif %}
+                                {% endfor %}
+                                 {{ post.datetime |date('Y-m-d H:i:s' ) }}
+                            </td>
+                           <td class="content">
+                                {{ post.content }}
+                            {#<div class="button">edit post</div>#}
+                            </td>
+                        </tr>
+                        {% endfor %}
+
+                    </table>
+                </div>
+
+            </div>
+
+
+            <div class="line"></div>
+
+            {% if app.user %}
+
+                <form action="{{ path("inputPost", {'technologyid' : technologyid, 'userid': app.user.id }) }}"
+                      method="post">
+
+                    <textarea name="content" id="content" cols="250" rows="7" class="boxsizingBorder"
+                              placeholder="add something smart to the topic ..."></textarea>
+                    <input type="submit" class="buttonPost" value="send post">
+
+                </form>
+
+            {% endif %}
+
+
+        </div>
+    </div>
+</div>
+</div>
+</div>
+
+
+{% endblock %}
+
+
+
+
+

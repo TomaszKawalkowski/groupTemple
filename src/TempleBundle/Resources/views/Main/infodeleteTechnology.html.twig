@@ -1,0 +1,9 @@
+{{ form_start(form,{action: path("deleteTechnology" )}) }}
+    {{ form_errors(form) }}
+<label>Technology name:</label>
+<div class="form-group">
+    {{ form_widget(form.id,{'attr': {'class': 'form-control'}}) }}
+    <div class="odstep15"></div>
+    {{ form_widget(form.save, {'attr': {'class': 'button'}}) }}
+    {{ form_end(form) }}
+</div>

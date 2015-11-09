@@ -1,0 +1,62 @@
+{% extends "TempleBundle:Meta:meta.html.twig" %}
+
+{% block courseInfo %}
+    {{ render(controller('TempleBundle:BootcampInfo:BootcampInfo')) }}
+{% endblock %}
+
+  {% block infoDelete %}
+
+<div class="container">
+    <div class="row">
+        <div class="odstep35"></div>
+        <div class="odstep35"></div>
+        <div class="col-sm-4">
+
+            <h3 style="color:white">Remove Technology</h3>
+
+            {{ render(controller('TempleBundle:Main:infodeleteTechnology')) }}
+
+        </div>
+        {% endblock %}
+        {% block content %}
+        <div class="col-sm-4 ">
+
+            <h3 style="color:white">Add Technology</h3>
+            <div class="form-group">
+
+                {{ form_start(form, {action:path('addTechnology')}) }}
+                {{ form_errors(form) }}
+
+                <label>Technology name:</label>
+                {{ form_widget(form.name,{'attr': {'class': 'form-control'}}) }}
+
+
+                <div class="odstep5"></div>
+                <label>Technology description  :</label>
+                {{ form_widget(form.description, {'attr': {'class': 'form-control'}}) }}
+
+                <div class="odstep5"></div>
+                <label>Pick Lecturer  :</label>
+                {{ form_widget(form.Lecturer_Id,  {'attr': {'class': ''}}) }}
+
+                <div class="odstep20"></div>
+                {{ form_widget(form.save, {'attr': {'class': 'button'}}) }}
+
+                {{ form_end(form) }}
+            </div>
+        </div>
+        <div class="col-sm-4">
+            <h3 style="color:white">Edit Technology</h3>
+            {{ render(controller('TempleBundle:Main:selectTechnology')) }}
+        </div>
+    </div>
+
+</div>
+
+{% endblock %}
+
+{% block create %}
+
+
+
+{% endblock %}

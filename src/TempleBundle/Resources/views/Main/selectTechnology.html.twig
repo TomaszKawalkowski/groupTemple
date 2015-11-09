@@ -1,0 +1,22 @@
+{{ form_start(form,{action: path("editTechnology" )}) }}
+    {{ form_errors(form) }}
+<label>Technology name:</label>
+<div class="form-group">
+
+    {{ form_widget(form.id,{'attr': {'class': 'form-control'}}) }}
+    <div class="odstep15"></div>
+
+    {{ form_widget(form.name,{'attr': {'class': 'form-control', 'placeholder':'new name'}}) }}
+    <div class="odstep15"></div>
+
+    {{ form_widget(form.description,{'attr': {'class': 'form-control','placeholder':'new description'}}) }}
+    <div class="odstep15"></div>
+
+    {{ form_widget(form.Lecturer_Id,{'attr': {'class': 'form-control', 'placeholder':'new LecturerId'}}) }}
+    <div class="odstep15"></div>
+
+
+    {{ form_widget(form.save, {'attr': {'class': 'button'}}) }}
+
+     {{ form_end(form) }}
+</div>

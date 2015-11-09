@@ -1,0 +1,38 @@
+<div class="col-sm-8">
+    <div class="row">
+
+        {% for technology in technologyArrow %}
+        <a href= "{{ path('technologyPage', {'id' : technology.id }) }}">
+            <div class="col-sm-4 technology">
+                <table class="table mine_table">
+                    <tr class="tr_technology_name">
+                        <td>
+                            {{ technology.name }}
+                        </td>
+                    </tr>
+                    <tr class="lecturer_img_technology">
+                        <td>
+                            {% if loop.first %}
+                                <a href="https://www.linkedin.com/in/olastarzenska"> <img
+                                            src="{{ asset('img/ola.jpg') }}" class="img_technology" alt=""></a>
+                            {% else %}
+                                <img src="{{ asset('img/img1.jpg') }}" class="img_technology" alt="">
+                            {% endif %}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            {{ technology.description }}
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </a>
+        {% if loop.index is divisibleby(3) %}
+    </div>
+    <div class="row">
+        {% endif %}
+
+        {% endfor %}
+    </div>
+</div>

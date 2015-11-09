@@ -1,0 +1,41 @@
+{% extends "TempleBundle:Meta:head.html.twig" %}
+
+
+
+{% block welcome %}
+    <body class="welcome_background">
+    <div class="container">
+        <div class="row welcome">
+            <div class="col-sm-12">
+        <span class="templeWelcome1">
+            
+            Welcome to <br>
+            groupTemple<br><br>
+
+        </span>
+                <a href=
+                   {% if app.user == false %}
+                   "{{ path('fos_user_security_login') }}"><span class="templeWelcome2"> </span>
+
+                    {% endif %}
+
+                    {% if app.user %}
+                    "{{ path('main') }}"><span class="templeWelcome2">
+                    {% endif %}
+                        Demo version 1.0 <i class="fa fa-sign-in"></i>
+
+        </span></a>
+
+        </div>
+
+        </div>
+        <a href="http://pl.linkedin.com/in/tomaszkawalkowski">
+        <div class="odstep40 copyright">
+            &copy; Tomasz Kawałkowski
+        </div>
+    </a>
+
+    </div>
+
+    </body>
+{% endblock %}

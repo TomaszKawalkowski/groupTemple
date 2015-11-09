@@ -1,0 +1,14 @@
+{% extends "TempleBundle:Meta:meta.html.twig" %}
+
+{% block container %}
+     {{ render(controller('TempleBundle:Avatar:showAvatar')) }}
+        {% block content %}
+            {% include ('TempleBundle:Main:showAllTechnology.html.twig') %}
+            <div class="col-sm-2">
+
+            </div>
+        {% endblock %}
+
+    </div>
+
+{% endblock %}

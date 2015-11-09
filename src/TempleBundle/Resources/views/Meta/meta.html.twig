@@ -1,0 +1,88 @@
+{% extends "TempleBundle:Meta:head.html.twig" %}
+
+{% block menu %}
+    <nav class="navbar navbar-inverse navbar-fixed-top ">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href={{ path('welcome') }}><i class="fa fa-bookmark"></i>
+                    groupTemple <i class="fa fa-bookmark"></i>
+                </a>
+            </div>
+            <div>
+                <div class="collapse navbar-collapse" id="myNavbar">
+                    <ul class="nav navbar-nav logreg">
+
+                        {% if app.user == false %}
+
+                            <li><a href="{{ path('fos_user_security_login') }}"
+                                   style="color: orangered; font-weight: bolder">Login <i class="fa fa-sign-in"></i></a>
+                            </li>
+                            <li><a href="{{ path('fos_user_registration_register') }}"
+                                   style="color: blue; font-weight: bolder">Register <i class="fa fa-sign-in"></i></a>
+                            </li>
+                        {% endif %}
+                        {% if app.user %}
+                            <li><a href=""  style="color: blue; font-weight: bolder">Loged as: {{ app.user.username }}
+                                        | {{ app.user.email }} </a></li>
+
+                            <li><a href="{{ path('main') }}" >Main </a></li>
+                            <li><a href="">Till your Journey begins: </a></li>
+                            <li><a href=""  id="timer"> </a></li>
+
+                            <li><a href="{{ path('fos_user_security_logout') }}"
+                            style="color: orangered; font-weight: bolder" class="logout">Logout <i
+                            class="fa fa-sign-out"></i></a></li>
+
+                        {% endif %}
+                    </ul>
+                        {% if app.user %}
+                    <ul class="nav navbar-nav">
+
+                            <li><a href="" id="adminmenu"
+                                   style="color: orangered; font-weight: bolder">Admin Menu <i id="lock" class="fa fa-unlock-alt"></i>
+                                </a></li>
+                    </ul>
+                        {% endif %}
+                        {% if app.user %}
+                        <ul class="nav navbar-nav adminreg">
+
+                            <li><a href="{{ path('createTechnology') }}"
+                                   style="color: blue; font-weight: bolder">Technology Management </a></li>
+
+                            <li><a href="{{ path('fos_user_security_logout') }}"
+                                   style="color: blue; font-weight: bolder">User Management</a></li>
+
+                            <li><a href="{{ path('editBootcamp') }}"
+                                   style="color: blue; font-weight: bolder">Course Info Management </a></li>
+
+                            <li><a href="{{ path('fos_user_security_logout') }}"
+                                   style="color: blue; font-weight: bolder">Something special</a></li>
+                        </ul>
+                        {% endif %}
+                </div>
+            </div>
+        </div>
+    </nav>
+
+{% endblock %}
+
+{% block courseInfo %}
+    {{ render(controller('TempleBundle:BootcampInfo:BootcampInfo')) }}
+
+
+{% endblock %}
+
+{% block footer %}
+
+    <footer class="footer">
+        <div class="container">
+            <p class="text-muted">Application <span style = "color: orangered"> groupTemple
+                </span>is designed to improve sufficiency of long courses. Especially IT bootcamp courses ...</p>
+        </div>
+    </footer>
+{% endblock %}

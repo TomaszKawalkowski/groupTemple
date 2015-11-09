@@ -1,0 +1,16 @@
+{% extends "FOSUserBundle::layout.html.twig" %}
+
+{% trans_default_domain 'FOSUserBundle' %}
+
+{% block fos_user_content %}
+    <div class="odstep40"></div>
+    <p>{{ 'registration.confirmed'|trans({'%username%': user.username}) }}</p>
+    {% if targetUrl %}
+    <p><a href="{{ targetUrl }}">{{ 'registration.back'|trans }}</a></p>
+    {% endif %}
+    <a href="{{ path('main') }}"> Thank you for registration, proceed to --> groupTemple </a>
+{% endblock fos_user_content %}
+{% block courseInfo %}
+
+
+{% endblock %}

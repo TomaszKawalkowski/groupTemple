@@ -1,0 +1,55 @@
+{% extends "FOSUserBundle::layout.html.twig" %}
+
+{% trans_default_domain 'FOSUserBundle' %}
+
+{% block fos_user_content %}
+    {{ render(controller('TempleBundle:BootcampInfo:BootcampInfo')) }}
+    {% if error %}
+        <div>{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+    {% endif %}
+    <div class="odstep35"></div>
+    <div class="odstep35"></div>
+    <div class="container">
+        <div class="row">
+
+            <div class="col-sm-4"></div>
+            <div class="col-sm-4 ">
+
+                <div class="form-group form-width">
+
+                    <form action="{{ path("fos_user_security_check") }}" method="post">
+                        <input type="hidden" name="_csrf_token" value="{{ csrf_token }}" class="form-control"/>
+
+                        <label for="username" class="form_label">{{ 'username'|trans }}</label>
+                        <input type="text" id="username" name="_username" value="{{ last_username }}"
+                               required="required"
+                               class="form-control"/>
+
+                        <label for="password" class="form_label">{{ 'password'|trans }}</label>
+                        <input type="password" id="password" name="_password" required="required" class="form-control"/>
+
+                        <div class="odstep10"></div>
+
+                        <input type="submit" class="button" id="_submit" name="_submit" value="{{ 'Login'|trans }}"/>
+
+                        <div class="checkbox">
+                            <label><input type="checkbox" id="remember_me" name="_remember_me" value="on"
+                                          class="checkbox-inline"/>remember me</label>
+                        </div>
+
+
+                    </form>
+                    <a href="{{ path('fos_user_registration_register') }}">
+                        <button type="submit" class="button">
+                            First time ? | please Register
+                            <i class="fa fa-sign-in"></i></button>
+                    </a>
+                </div>
+            </div>
+            <div class="col-sm-4"></div>
+        </div>
+
+    </div>
+{% endblock fos_user_content %}
+{% block courseInfo %}
+{% endblock %}

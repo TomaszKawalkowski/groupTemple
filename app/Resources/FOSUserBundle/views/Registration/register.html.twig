@@ -1,0 +1,9 @@
+{% extends "FOSUserBundle::layout.html.twig" %}
+
+{% block fos_user_content %}
+    {{ render(controller('TempleBundle:BootcampInfo:BootcampInfo')) }}
+    <div class="odstep35"></div>
+{% include "FOSUserBundle:Registration:register_content.html.twig" %}
+{% endblock fos_user_content %}
+{% block courseInfo %}
+{% endblock %}

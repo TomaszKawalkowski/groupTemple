@@ -1,0 +1,34 @@
+<div class="container">
+
+    <div class="row bootCampInfo">
+        <div class="col-sm-4"></div>
+        <div class="col-sm-4">
+
+            <a href="info_Course">
+                {% for boo in boot %}
+                <div class="training_title">
+
+                    <span class="training_name title">
+                        {{ boo.name }}
+                    </span><br>
+                    <span class="training_date title">
+
+                       {{ boo.startDate|date("d-m-Y") }} - {{ boo.endDate|date('d-m-Y') }}  |  Main Lecturer: {{ boo.mainLecturer }}</span><br>
+
+
+                </div>
+
+            </a>
+        </div>
+        <div class="col-sm-4"></div>
+    </div>
+</div>
+<div class="odstep40"></div>
+
+<script type="text/javascript">
+    {% set n =  boo.startDate|date("Y-m-d H:i:s") %}
+    $("#timer").countdown(  '{{ n }}'  , function(event) {
+        $(this).text(event.strftime('%D days %H:%M:%S'));
+    });
+</script>
+{% endfor %}

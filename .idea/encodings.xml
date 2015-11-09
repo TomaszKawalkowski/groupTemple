@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="Encoding">
+    <file url="file://$PROJECT_DIR$/app/Resources/FOSUserBundle/views/Security/login.html.twig" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/TempleBundle/Resources/views/BootcampInfo/BootcampInfo.html.twig" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/TempleBundle/Resources/views/Meta/meta.html.twig" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/TempleBundle/Resources/views/Welcome/welcome.html.twig" charset="UTF-8" />
+  </component>
+</project>

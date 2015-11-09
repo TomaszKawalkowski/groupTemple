@@ -1,0 +1,41 @@
+{% extends "TempleBundle:Meta:meta.html.twig" %}
+
+{% block content %}
+<div class="container">
+        <div class="row">
+
+                <div class="col-sm-4"></div>
+                <div class="col-sm-4 ">
+                        <div class="form-group">
+                                <div class="odstep35"></div>
+                                <div class="odstep35"></div>
+                                {{ form_start(form, {action:path('updateBootcamp')}) }}
+                                {{ form_errors(form) }}
+
+                                <label>Course Name:</label>
+                                {{ form_widget(form.name,{'attr': {'class': 'form-control'}}) }}
+
+
+                                <div class="odstep5"></div>
+                                <label>Pick start date and time  :</label>
+                                {{ form_widget(form.startDate, {'attr': {'class': ''}}) }}
+
+                                <div class="odstep5"></div>
+                                <label>Pick end date and time  :</label>
+                                {{ form_widget(form.endDate,  {'attr': {'class': ''}}) }}
+
+                                <div class="odstep5"></div>
+                                <label>Set main Lecturer | name lastname  :</label>
+                                {{ form_widget(form.mainLecturer,   {'attr': {'class': 'form-control'}}) }}
+
+                                <div class="odstep20"></div>
+
+                                {{ form_end(form, {'attr': {'class': 'button'}}) }}
+                        </div>
+                </div>
+                <div class="col-sm-4"></div>
+        </div>
+
+</div>
+
+{% endblock %}

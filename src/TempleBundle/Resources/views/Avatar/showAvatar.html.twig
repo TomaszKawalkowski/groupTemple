@@ -1,0 +1,26 @@
+<div class="break_menu"></div>
+<div class="row no-gutters">
+    <div class="col-sm-2">
+        <div class="all_students">
+            <div class="list_students">
+
+                {% for user in userArrow %}
+                    <div class="each_student">
+                        <div class="student_name">
+                            &nbsp&nbsp&nbsp&nbsp {{ user.username }}
+                        </div>
+                        <div class="each_img">
+                            {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}                  {# //To je do zrobienia, powinien sprawdzaæ #}
+                                <img src="{{ asset('img/img1.jpg') }}" class="img"
+                                     alt="">      {# czy u¿ytkownik z listy jest sprawdzany #}
+                            {% else %}                                                          {# a nie czy ja jestem zalogowany  #}
+
+                                <img src="{{ asset('img/img1.jpg') }}" class="imgunlogged" alt="">
+                            {% endif %}
+                        </div>
+                    </div>
+                {% endfor %}
+
+            </div>
+        </div>
+    </div>
