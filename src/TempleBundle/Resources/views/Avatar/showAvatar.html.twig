@@ -7,7 +7,7 @@
                 {% for user in userArrow %}
                     <div class="each_student">
                         <div class="student_name">
-                            &nbsp&nbsp&nbsp&nbsp {{ user.username }}
+                            &nbsp&nbsp&nbsp&nbsp {{ user.username }} &nbsp
                         </div>
                         <div class="each_img">
                             {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}                  {# //To je do zrobienia, powinien sprawdzaæ #}

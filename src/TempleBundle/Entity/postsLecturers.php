@@ -43,6 +43,13 @@ class postsLecturers
     private $datetime;
 
     /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="editdatetime", type="datetime", nullable = true)
+     */
+    private $editdatetime;
+
+    /**
      * @var string
      *
      * @ORM\Column(name="content", type="text")
@@ -99,11 +106,35 @@ class postsLecturers
     }
 
     /**
+     * Set editdatetime
+     *
+     * @param \DateTime $editdatetime
+     *
+     * @return postsLecturers
+     */
+    public function setEditdatetime($editdatetime)
+    {
+        $this->editdatetime = $editdatetime;
+
+        return $this;
+    }
+
+    /**
      * Get datetime
      *
      * @return \DateTime
      */
     public function getDatetime()
+    {
+        return $this->datetime;
+    }
+
+    /**
+     * Get editdatetime
+     *
+     * @return \DateTime
+     */
+    public function getEditdatetime()
     {
         return $this->datetime;
     }

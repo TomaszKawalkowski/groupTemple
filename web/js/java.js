@@ -6,6 +6,8 @@ $(document).on('ready', function () {
         $('.student_name').toggle(400);
 
     });
+
+
     $('#adminmenu').on('click', function (event) {
         event.preventDefault();
         $('.logreg').toggle(2000);

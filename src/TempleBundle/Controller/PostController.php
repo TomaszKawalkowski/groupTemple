@@ -46,8 +46,7 @@ class PostController extends Controller
             return $this->redirect($this->generateUrl('technologyPage', array('technologyid' => $technologyid,
                 'id' => $id)));
 
-        }
-        else{
+        } else {
             $em = $this->getDoctrine()->getManager();
             $id = $user->getId();
 
@@ -61,31 +60,66 @@ class PostController extends Controller
             $em->flush();
             return $this->redirect($this->generateUrl('technologyPage', array('technologyid' => $technologyid,
                 'id' => $id)));
+        }
+    }
 
+    /**
+     * @Route("/deletePost/{postid}/{student}/{technologyid}", name = "deletePost")
+     * @Template()
+     */
+    public function deletePostAction(Request $request, $postid, $student, $technologyid)
+    {
+        $date = new \DateTime();
+
+        if ($student == 0) {
+            $editedPost = $this->get('doctrine')->getRepository('TempleBundle:postsLecturers')->findByid($postid);
+            $em = $this->getDoctrine()->getManager();
+            $editedPost->setContent($request->request->get('content'));
+            $em->persist($editedPost);
+            $em->flush();
+            return $this->redirect($this->generateUrl('technologyPage', array('technologyid' => $technologyid,
+                'id' => $technologyid)));
+        }
+        elseif ($student == 1) {
+            $editedPost = $this->get('doctrine')->getRepository('TempleBundle:postStudents')->findByid($postid);
+            $em = $this->getDoctrine()->getManager();
+            $editedPost->setContent($request->request->get('content'));
+            $editedPost[0]->setEditdatetime($date);
+            $em->persist($editedPost);
+            $em->flush();
+            return $this->redirect($this->generateUrl('technologyPage', array('technologyid' => $technologyid,
+                'id' => $technologyid)));
         }
 
-
-
     }
 
     /**
-     * @Route("/deletePost")
+     * @Route("/editPost/{postid}/{student}/{technologyid}", name= "editPost")
      * @Template()
      */
-    public function deletePostAction()
+    public function editPostAction(Request $request, $postid, $student, $technologyid)
     {
-        return array(// ...
-        );
-    }
+        $date = new \DateTime();
 
-    /**
-     * @Route("/editPost")
-     * @Template()
-     */
-    public function editPostAction()
-    {
-        return array(// ...
-        );
-    }
+        if ($student == 0) {
+            $editedPost = $this->get('doctrine')->getRepository('TempleBundle:postsLecturers')->findByid($postid);
+            $em = $this->getDoctrine()->getManager();
+            $editedPost[0]->setContent($request->request->get('content'));
+            $em->persist($editedPost[0]);
+            $em->flush();
+            return $this->redirect($this->generateUrl('technologyPage', array('technologyid' => $technologyid,
+                'id' => $technologyid)));
+        }
+        elseif ($student == 1) {
+            $editedPost = $this->get('doctrine')->getRepository('TempleBundle:postStudents')->findByid($postid);
+            $em = $this->getDoctrine()->getManager();
+            $editedPost[0]->setContent($request->request->get('content'));
+            $editedPost[0]->setEditdatetime($date);
+            $em->persist($editedPost[0]);
+            $em->flush();
+            return $this->redirect($this->generateUrl('technologyPage', array('technologyid' => $technologyid,
+                'id' => $technologyid)));
+        }
 
+    }
 }

@@ -23,7 +23,7 @@ class postStudents
 
     /**
      * @var integer
-     *
+     * @ORM\OneToOne(targetEntity="User", mappedBy="id")
      * @ORM\Column(name="userid", type="integer")
      */
     private $userid;
@@ -37,15 +37,22 @@ class postStudents
 
     /**
      * @var \DateTime
-     * @ORM\OneToOne(targetEntity="User", mappedBy="id")
+     *
      * @ORM\Column(name="datetime", type="datetime")
      */
     private $datetime;
 
     /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="editdatetime", type="datetime", nullable = true)
+     */
+    private $editdatetime;
+
+    /**
      * @var string
      *
-     * @ORM\Column(name="content", type="text")
+     * @ORM\Column(name="content", type="text", nullable = true)
      */
     private $content;
 
@@ -99,6 +106,20 @@ class postStudents
     }
 
     /**
+     * Set editdatetime
+     *
+     * @param \DateTime $datetime
+     *
+     * @return postStudents
+     */
+    public function setEditdatetime($editdatetime)
+    {
+        $this->editdatetime = $editdatetime;
+
+        return $this;
+    }
+
+    /**
      * Get datetime
      *
      * @return \DateTime
@@ -106,6 +127,16 @@ class postStudents
     public function getDatetime()
     {
         return $this->datetime;
+    }
+
+    /**
+     * Get editdatetime
+     *
+     * @return \DateTime
+     */
+    public function getEditdatetime()
+    {
+        return $this->editdatetime;
     }
 
     /**
