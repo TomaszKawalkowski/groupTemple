@@ -4,7 +4,7 @@
 
 <div class="col-sm-8">
     <div class="row">
-        <div class="posttlo">
+
             <div class="row">
                 <div class="col-sm-12">
                     <div class="odstep35"></div>
@@ -17,7 +17,7 @@
                         </thead>
                         {% for post in postsLecturers %}
                            <tr>
-                            <td class="Lposts">
+                            <td class="posthead">
                                {% for user in users %}
                                     {% if post.userid == user.id %}
                                         {{ user.username }}
@@ -25,8 +25,10 @@
                                 {% endfor %}
                                  {{ post.datetime |date('Y-m-d H:i:s' ) }}
                             </td>
-                           <td class="content">
+                           <td class="Lecturercontent">
+                               <div class="containerforButtons">
                                 {{ post.content }}
+
                                  {% set n = random() %}
                                  {% set m =  random() %}
 
@@ -34,20 +36,22 @@
                                     {% set m =  random() %}
                                  {% endif %}
                                  {% if post.userid == app.user.id %}
-                          <button class="buttonEdit" id="{{ n }}">edit post</button>
-                          <button class="buttonDelete">delete post</button>
-                                 {% endif %}
-                              {% if  (post.editdatetime |date('Y-m-d H:i:s')) != '-0001-11-30 00:00:00' and (post.editdatetime) != null %}
-                          <span class="editspan">
 
-                                   {% for user in users %}
-                                        {% if post.userid == user.id %}
-                                            {{ user.username }}
-                                        {% endif %}
-                                   {% endfor %}
-                           at {{ post.editdatetime|date('Y-m-d H:i:s')}}</span>
-                               {% endif %}
-                         </td>
+                                  <button class="buttonEdit" id="{{ n }}">edit post</button>
+
+                                    <a href="{{ path('deletePost', {'postid' : post.id, 'student':'0','technologyid' : technologyid }) }}" class="deleteLink">
+                                    <button class="buttonDelete">delete post</button></a>
+
+                                         {% endif %}
+
+                                       {% if  (post.editdatetime |date('Y-m-d H:i:s')) != '-0001-11-30 00:00:00' and (post.editdatetime) != null %}
+                                  <span class="editspan">
+                                  {#the line below was formatted innline cause I had troubles with end of line after twig commands#}
+                                     Post was edited by {% for user in users %}{% if post.userid == user.id %}    {{ user.username }}  {% endif %}  {% endfor %}  at {{ post.editdatetime|date('Y-m-d H:i:s')}}</span>
+                                   {% endif %}
+                             </div>
+                            </td>
+
                         </tr>
                            <tr class = "editPostInput" id = "{{ m }}">
 
@@ -61,11 +65,11 @@
                                 <td class="content" >
                                 {% if app.user %}
 
-                                <form action="{{ path("editPost", {'postid' : post.id, 'student':'1','technologyid' : technologyid }) }}"
+                                <form action="{{ path("editPost", {'postid' : post.id, 'student':'0','technologyid' : technologyid }) }}"
                                       method="post">
 
                                     <textarea name="content" id="{{ post.datetime |date('Y-m-d H:i:s' ) }}" class="boxsizingBorder"
-                                             cols="250" rows="7">{{ post.content }}</textarea>
+                                             cols="250" rows="3">{{ post.content }}</textarea>
                                     <input type="submit" class="buttonEditSend" value="send changes">
 
                                 </form>
@@ -79,7 +83,7 @@
 
                         {% for post in postStudents %}
                         <tr>
-                            <td class="postinfo">
+                            <td class="posthead">
                                {% for user in users %}
                                     {% if post.userid == user.id %}
                                         {{ user.username }}
@@ -88,6 +92,7 @@
                                  {{ post.datetime |date('Y-m-d H:i:s' ) }}
                             </td>
                            <td class="content">
+                                <div class="containerforButtons">
                                 {{ post.content }}
 
                                  {% set n = random() %}
@@ -98,15 +103,21 @@
                                  {% endif %}
                                  {% if post.userid == app.user.id %}
 
-                          <button class="buttonEdit" id="{{ n }}">edit post</button>
-                          <button class="buttonDelete">delete post</button>
-                                 {% endif %}
-                               {% if  (post.editdatetime |date('Y-m-d H:i:s')) != '-0001-11-30 00:00:00' and (post.editdatetime) != null %}
-                          <span class="editspan">
-                          {#the line below was formatted innline cause I had troubles with end of line after twig commands#}
-                             Post was edited by {% for user in users %}{% if post.userid == user.id %}    {{ user.username }}  {% endif %}  {% endfor %}  at {{ post.editdatetime|date('Y-m-d H:i:s')}}</span>
-                               {% endif %}
+                                  <button class="buttonEdit" id="{{ n }}">edit post</button>
+
+                                    <a href="{{ path('deletePost', {'postid' : post.id, 'student':'1','technologyid' : technologyid }) }}" class="deleteLink">
+                                    <button class="buttonDelete">delete post</button></a>
+
+                                         {% endif %}
+
+                                       {% if  (post.editdatetime |date('Y-m-d H:i:s')) != '-0001-11-30 00:00:00' and (post.editdatetime) != null %}
+                                  <span class="editspan">
+                                  {#the line below was formatted innline cause I had troubles with end of line after twig commands#}
+                                     Post was edited by {% for user in users %}{% if post.userid == user.id %}    {{ user.username }}  {% endif %}  {% endfor %}  at {{ post.editdatetime|date('Y-m-d H:i:s')}}</span>
+                                   {% endif %}
+                             </div>
                             </td>
+
                         </tr>
                            <tr class = "editPostInput" id = "{{ m }}">
 
@@ -124,7 +135,7 @@
                                       method="post">
 
                                     <textarea name="content" id="{{ post.datetime |date('Y-m-d H:i:s' ) }}" class="boxsizingBorder"
-                                             cols="250" rows="7">{{ post.content }}</textarea>
+                                             cols="250" rows="3">{{ post.content }}</textarea>
                                     <input type="submit" class="buttonEditSend" value="send changes">
 
                                 </form>
@@ -144,8 +155,8 @@
                 <form action="{{ path("inputPost", {'technologyid' : technologyid, 'userid': app.user.id }) }}"
                       method="post">
 
-                    <textarea name="content" id="content" cols="250" rows="7" class="boxsizingBorder"
-                              placeholder="add something smart to the topic ..."></textarea>
+                    <textarea name="content" id="content" cols="250" rows="3" class="boxsizingBorder"
+                    placeholder="add something smart to the topic ..."></textarea>
                     <input type="submit" class="buttonEditSend" value="send post">
 
                 </form>

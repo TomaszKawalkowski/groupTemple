@@ -27,11 +27,54 @@ class MainController extends Controller
         $userArrow = $this->get('doctrine')->getRepository('AppBundle:User')->findAll();
         $technologyArrow = $this->get('doctrine')->getRepository('TempleBundle:Technology')->findAll();
 
+        $PostsLecturers = $this->getDoctrine()->getRepository('TempleBundle:postsLecturers')->findAll();
+        $PostsStudents = $this->getDoctrine()->getRepository('TempleBundle:postStudents')->findAll();
+
+        $quantityTechnology = count($technologyArrow);
+        $n = 0;
+        $technologyIdArrow = [];
+        for ($i = 0; $i < $quantityTechnology; $i++){
+            $n = $technologyArrow[$i]->getId();
+            $technologyIdArrow[$i] = $n;
+        }
+
+        $quantityPostStudents = [];
+
+
+        for ($i = 0; $i < $quantityTechnology; $i++){
+            $k = 0;
+            for ($p = 0; $p < count($PostsStudents); $p++){
+
+            if ($PostsStudents[$p]->getTechnologyid() == $technologyIdArrow[$i])
+                $k = $k + 1;
+                $quantityPostStudents[$i]= $k;
+            }
+        }
+
+        $quantityPostLecturers = [];
+
+
+        for ($i = 0; $i < $quantityTechnology; $i++){
+            $k = 0;
+            for ($p = 0; $p < count($PostsLecturers); $p++){
+
+            if ($PostsLecturers[$p]->getTechnologyid() == $technologyIdArrow[$i])
+                $k = $k + 1;
+                $quantityPostLecturers[$i]= $k;
+            }
+        }
+
+
         return
             array(
                 'boot' => $bootCampInfo,
                 'userArrow' => $userArrow,
-                'technologyArrow' => $technologyArrow
+                'technologyArrow' => $technologyArrow,
+                'PostsLecturers' => $PostsLecturers,
+                'PostsStudents' =>  $PostsStudents,
+                'technologyIdArrow' =>  $technologyIdArrow,
+                'quantityPostStudents' =>  $quantityPostStudents,
+                'quantityPostLecturers' =>  $quantityPostLecturers
             );
     }
 

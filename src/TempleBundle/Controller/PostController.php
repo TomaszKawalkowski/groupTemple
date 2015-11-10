@@ -43,14 +43,14 @@ class PostController extends Controller
             $newpost->setTechnologyid($technologyid);
             $em->persist($newpost);
             $em->flush();
-            return $this->redirect($this->generateUrl('technologyPage', array('technologyid' => $technologyid,
-                'id' => $id)));
+            return $this->redirect($this->generateUrl('technologyPage', array(
+                'id' => $technologyid)));
 
         } else {
             $em = $this->getDoctrine()->getManager();
             $id = $user->getId();
 
-            $newpost = new postStudents();
+            $newpost = new postsLecturers();
 
             $newpost->setDatetime($date);
             $newpost->setContent($request->request->get('content'));
@@ -58,8 +58,8 @@ class PostController extends Controller
             $newpost->setTechnologyid($technologyid);
             $em->persist($newpost);
             $em->flush();
-            return $this->redirect($this->generateUrl('technologyPage', array('technologyid' => $technologyid,
-                'id' => $id)));
+            return $this->redirect($this->generateUrl('technologyPage', array(
+                'id' => $technologyid)));
         }
     }
 
@@ -69,23 +69,20 @@ class PostController extends Controller
      */
     public function deletePostAction(Request $request, $postid, $student, $technologyid)
     {
-        $date = new \DateTime();
 
-        if ($student == 0) {
-            $editedPost = $this->get('doctrine')->getRepository('TempleBundle:postsLecturers')->findByid($postid);
+
+        if ($student == '0') {
+            $deletedPost = $this->get('doctrine')->getRepository('TempleBundle:postsLecturers')->findByid($postid);
             $em = $this->getDoctrine()->getManager();
-            $editedPost->setContent($request->request->get('content'));
-            $em->persist($editedPost);
+            $em->remove($deletedPost[0]);
             $em->flush();
             return $this->redirect($this->generateUrl('technologyPage', array('technologyid' => $technologyid,
                 'id' => $technologyid)));
         }
-        elseif ($student == 1) {
-            $editedPost = $this->get('doctrine')->getRepository('TempleBundle:postStudents')->findByid($postid);
+        elseif ($student == '1') {
+            $deletedPost = $this->get('doctrine')->getRepository('TempleBundle:postStudents')->findByid($postid);
             $em = $this->getDoctrine()->getManager();
-            $editedPost->setContent($request->request->get('content'));
-            $editedPost[0]->setEditdatetime($date);
-            $em->persist($editedPost);
+            $em->remove($deletedPost[0]);
             $em->flush();
             return $this->redirect($this->generateUrl('technologyPage', array('technologyid' => $technologyid,
                 'id' => $technologyid)));
@@ -101,16 +98,17 @@ class PostController extends Controller
     {
         $date = new \DateTime();
 
-        if ($student == 0) {
+        if ($student == '0') {
             $editedPost = $this->get('doctrine')->getRepository('TempleBundle:postsLecturers')->findByid($postid);
             $em = $this->getDoctrine()->getManager();
             $editedPost[0]->setContent($request->request->get('content'));
+            $editedPost[0]->setEditdatetime($date);
             $em->persist($editedPost[0]);
             $em->flush();
             return $this->redirect($this->generateUrl('technologyPage', array('technologyid' => $technologyid,
                 'id' => $technologyid)));
         }
-        elseif ($student == 1) {
+        elseif ($student == '1') {
             $editedPost = $this->get('doctrine')->getRepository('TempleBundle:postStudents')->findByid($postid);
             $em = $this->getDoctrine()->getManager();
             $editedPost[0]->setContent($request->request->get('content'));
